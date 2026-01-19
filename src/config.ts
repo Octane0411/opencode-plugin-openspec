@@ -2,14 +2,20 @@ import type { Hooks } from "@opencode-ai/plugin";
 import { isOpenSpecProject } from "./utils/detection";
 import { OPENSPEC_SYSTEM_PROMPT } from "./prompts";
 
-export function createConfigHook(ctx: { directory: string }): Hooks["config"] {
+export function createConfigHook(ctx: { directory: string }, log: (msg: string, ...args: any[]) => void): Hooks["config"] {
   return async (config) => {
+    log("[OpenSpec Plugin] Config hook triggered.");
+    
     // 1. Check if this is an OpenSpec project
     const mockCtx = { directory: ctx.directory } as any;
     
-    if (!await isOpenSpecProject(mockCtx)) {
+    const isActive = await isOpenSpecProject(mockCtx);
+    if (!isActive) {
+      log("[OpenSpec Plugin] Config hook: Not an OpenSpec project, skipping.");
       return;
     }
+
+    log("[OpenSpec Plugin] Config hook: Injecting openspec-plan agent.");
 
     // 2. Define the OpenSpec Plan Agent
     const openSpecAgent = {
@@ -19,22 +25,29 @@ export function createConfigHook(ctx: { directory: string }): Hooks["config"] {
       prompt: OPENSPEC_SYSTEM_PROMPT,
       permission: {
         edit: {
-          "**/*.spec.md": "allow",
-          "**/project.md": "allow",
-          "**/AGENTS.md": "allow",
-          // Allow creating new spec directories
-          "specs/**": "allow",
-          "openspec/**": "allow"
+          // Allow editing specific root files
+          "project.md": "allow",
+          "AGENTS.md": "allow",
+          // Allow editing anything in openspec directory
+          "openspec/**": "allow",
+          // Allow editing anything in specs directory (standard OpenSpec structure)
+          "specs/**": "allow"
         }
       },
       color: "#FF6B6B" // Distinctive color for the agent
     };
 
     // 3. Inject into configuration
-    // We use 'any' cast here to bypass strict type checking on the config object structure
-    // because we are dynamically extending it.
     const agentConfig = (config.agent || {}) as any;
+    
+    // Check if already injected to avoid potential re-injection loops
+    if (agentConfig["openspec-plan"]) {
+       log("[OpenSpec Plugin] Agent already exists, updating...");
+    }
+    
     agentConfig["openspec-plan"] = openSpecAgent;
     config.agent = agentConfig;
+    
+    log("[OpenSpec Plugin] Config hook: Injection complete.");
   };
 }
