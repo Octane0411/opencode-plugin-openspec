@@ -1,15 +1,38 @@
 {
   "name": "opencode-plugin-openspec",
   "version": "0.1.0",
+  "description": "An OpenCode plugin that integrates OpenSpec, providing a dedicated agent for planning and specifying software architecture.",
   "type": "module",
-  "main": "src/index.ts",
+  "main": "dist/index.js",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "bun build ./src/index.ts --outfile ./dist/index.js --target node",
+    "watch": "bun build ./src/index.ts --outfile ./dist/index.js --target node --watch",
+    "prepublishOnly": "bun run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Octane0411/opencode-plugin-openspec.git"
+  },
+  "keywords": [
+    "opencode",
+    "plugin",
+    "openspec",
+    "agent",
+    "architecture",
+    "planning"
+  ],
+  "author": "Octane0411",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Octane0411/opencode-plugin-openspec/issues"
+  },
+  "homepage": "https://github.com/Octane0411/opencode-plugin-openspec#readme",
   "peerDependencies": {
     "@opencode-ai/plugin": "^1.1.19",
     "@opencode-ai/sdk": "^1.1.19"
-  },
-  "scripts": {
-    "build": "bun build ./src/index.ts --outfile ./dist/index.js --target node",
-    "watch": "bun build ./src/index.ts --outfile ./dist/index.js --target node --watch"
   },
   "devDependencies": {
     "bun-types": "latest",

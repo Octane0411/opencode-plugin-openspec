@@ -15,39 +15,36 @@ An OpenCode plugin that integrates OpenSpec, providing a dedicated agent for pla
 
 ## Installation
 
-You don't need to build this plugin yourself. You can install it via npm or download the pre-built binary.
+### Option 1: Install from NPM (Recommended)
 
-### Option 1: Install via npm (Recommended)
+Simply add the plugin package name to your `opencode.json` configuration file (usually located at `~/.config/opencode/opencode.json` or `.opencode/opencode.json`):
 
-1. Install the plugin globally:
-   ```bash
-   npm install -g opencode-plugin-openspec
-   ```
+```json
+{
+  "plugin": [
+    "opencode-plugin-openspec"
+  ]
+}
+```
 
-2. Add it to your `opencode.json` (usually in `~/.config/opencode/opencode.json` or `.opencode/opencode.json`):
+OpenCode will automatically download and install the plugin the next time it runs.
 
-   ```json
-   {
-     "plugin": [
-       "opencode-plugin-openspec"
-     ]
-   }
-   ```
-   *(Note: If OpenCode doesn't support package names directly, you may need to provide the full path, e.g., `$(npm root -g)/opencode-plugin-openspec/dist/index.js`)*
+### Option 2: Manual / Local Installation
 
-### Option 2: Download from Releases
+If you want to install from a local build or a specific file:
 
-1. Go to the [Releases](https://github.com/yourusername/opencode-plugin-openspec/releases) page.
-2. Download the latest `index.js`.
-3. Place it anywhere on your disk.
-4. Add the path to your `opencode.json`:
-   ```json
-   {
-     "plugin": [
-       "/absolute/path/to/downloaded/index.js"
-     ]
-   }
-   ```
+1.  Build the project:
+    ```bash
+    bun run build
+    ```
+2.  Add the absolute path to your `opencode.json`:
+    ```json
+    {
+      "plugin": [
+        "file:///absolute/path/to/opencode-plugin-openspec/dist/index.js"
+      ]
+    }
+    ```
 
 ## Usage
 
@@ -57,8 +54,6 @@ You don't need to build this plugin yourself. You can install it via npm or down
 4. Start planning your architecture! The agent will have access to modify your spec files while keeping your code safe.
 
 ## Development
-
-If you want to contribute or modify the plugin, follow these steps:
 
 1. Clone the repository:
    ```bash
