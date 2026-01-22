@@ -2,6 +2,19 @@
 
 An OpenCode plugin that integrates OpenSpec, providing a dedicated agent for planning and specifying software architecture.
 
+## Motivation
+
+This plugin addresses the need for a dedicated planning mode in OpenCode, as discussed in [Issue #8324](https://github.com/anomalyco/opencode/issues/8324).
+
+**The Problem:**
+When using OpenCode's standard "Build mode" to create or modify OpenSpec planning documents, AI agents often attempt to start implementing code changes immediately, before the planning phase is complete. This can lead to premature coding and a lack of focus on the architectural design.
+
+**The Solution:**
+`opencode-plugin-openspec` introduces a specialized **OpenSpec Architect** agent. This agent is configured to:
+*   **Allow** creating and editing OpenSpec documents (e.g., `project.md`, `specs/**`).
+*   **Prevent** modifications to the implementation code.
+*   **Focus** entirely on planning and specification, ensuring a clear separation between design and implementation.
+
 ## Features
 
 - **Auto-Detection**: Automatically detects if the current workspace is an OpenSpec project.
