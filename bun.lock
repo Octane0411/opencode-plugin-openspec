@@ -1,0 +1,32 @@
+{
+  "lockfileVersion": 1,
+  "configVersion": 1,
+  "workspaces": {
+    "": {
+      "name": "opencode-plugin-openspec",
+      "devDependencies": {
+        "bun-types": "latest",
+        "typescript": "^5.0.0",
+      },
+      "peerDependencies": {
+        "@opencode-ai/plugin": "^1.1.19",
+        "@opencode-ai/sdk": "^1.1.19",
+      },
+    },
+  },
+  "packages": {
+    "@opencode-ai/plugin": ["@opencode-ai/plugin@1.1.25", "", { "dependencies": { "@opencode-ai/sdk": "1.1.25", "zod": "4.1.8" } }, "sha512-oTUWS446H/j7z3pdzo3cOrB5N87XZ/RKdgPD8yHv/rLX92B4YQHjOqggVQ56Q+1VEnN0jxzhoqRylv/0ZEts/Q=="],
+
+    "@opencode-ai/sdk": ["@opencode-ai/sdk@1.1.25", "", {}, "sha512-mWUX489ArEF2ICg3iZsx2VQaGS3Z2j/dwAJDacao9t7dGDzjOIaacPw2weZ10zld7XmT9V9C0PM/A5lDZ52J+w=="],
+
+    "@types/node": ["@types/node@25.0.9", "", { "dependencies": { "undici-types": "~7.16.0" } }, "sha512-/rpCXHlCWeqClNBwUhDcusJxXYDjZTyE8v5oTO7WbL8eij2nKhUeU89/6xgjU7N4/Vh3He0BtyhJdQbDyhiXAw=="],
+
+    "bun-types": ["bun-types@1.3.6", "", { "dependencies": { "@types/node": "*" } }, "sha512-OlFwHcnNV99r//9v5IIOgQ9Uk37gZqrNMCcqEaExdkVq3Avwqok1bJFmvGMCkCE0FqzdY8VMOZpfpR3lwI+CsQ=="],
+
+    "typescript": ["typescript@5.9.3", "", { "bin": { "tsc": "bin/tsc", "tsserver": "bin/tsserver" } }, "sha512-jl1vZzPDinLr9eUt3J/t7V6FgNEw9QjvBPdysz9KfQDD41fQrC2Y4vKQdiaUpFT4bXlb1RHhLpp8wtm6M5TgSw=="],
+
+    "undici-types": ["undici-types@7.16.0", "", {}, "sha512-Zz+aZWSj8LE6zoxD+xrjh4VfkIG8Ya6LvYkZqtUQGJPZjYl53ypCaUwWqo7eI0x66KBGeRo+mlBEkMSeSZ38Nw=="],
+
+    "zod": ["zod@4.1.8", "", {}, "sha512-5R1P+WwQqmmMIEACyzSvo4JXHY5WiAFHRMg+zBZKgKS+Q1viRa0C1hmUKtHltoIFKtIdki3pRxkmpP74jnNYHQ=="],
+  }
+}
