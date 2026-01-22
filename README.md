@@ -15,9 +15,19 @@ An OpenCode plugin that integrates OpenSpec, providing a dedicated agent for pla
 
 ## Installation
 
-### Option 1: Install from NPM (Recommended)
+### For Humans
 
-Simply add the plugin package name to your `opencode.json` configuration file (usually located at `~/.config/opencode/opencode.json` or `.opencode/opencode.json`):
+**Option 1: Let your agent do it (Recommended)**
+
+Paste this prompt into OpenCode:
+
+```
+Install opencode-plugin-openspec. It is an NPM package. Please add "opencode-plugin-openspec" to my opencode.json plugin list.
+```
+
+**Option 2: Manual Installation**
+
+Add the plugin package name to your `opencode.json` configuration file (usually located at `~/.config/opencode/opencode.json` or `.opencode/opencode.json`):
 
 ```json
 {
@@ -29,22 +39,21 @@ Simply add the plugin package name to your `opencode.json` configuration file (u
 
 OpenCode will automatically download and install the plugin the next time it runs.
 
-### Option 2: Manual / Local Installation
+### For LLM Agents
 
-If you want to install from a local build or a specific file:
+If you are an AI agent tasked with installing this plugin, follow these steps:
 
-1.  Build the project:
-    ```bash
-    bun run build
-    ```
-2.  Add the absolute path to your `opencode.json`:
+1.  **Locate Configuration**: Find the user's OpenCode configuration file. It is typically at `~/.config/opencode/opencode.json` or `.opencode/opencode.json` in the workspace root.
+2.  **Read Configuration**: Read the content of the configuration file.
+3.  **Update Configuration**: Add `"opencode-plugin-openspec"` to the `plugin` array. If the `plugin` array does not exist, create it.
     ```json
     {
       "plugin": [
-        "file:///absolute/path/to/opencode-plugin-openspec/dist/index.js"
+        "opencode-plugin-openspec"
       ]
     }
     ```
+4.  **Verify**: Inform the user that the plugin has been added and will be installed on the next OpenCode run.
 
 ## Usage
 
