@@ -4,7 +4,7 @@ An OpenCode plugin that integrates OpenSpec, providing a dedicated agent for pla
 
 ## Motivation
 
-This plugin addresses the need for a dedicated planning mode in OpenCode, as discussed in [Issue #8324](https://github.com/anomalyco/opencode/issues/8324).
+This plugin addresses the need for a dedicated planning mode in OpenCode.
 
 **The Problem:**
 When using OpenCode's standard "Build mode" to create or modify OpenSpec planning documents, AI agents often attempt to start implementing code changes immediately, before the planning phase is complete. This can lead to premature coding and a lack of focus on the architectural design.
