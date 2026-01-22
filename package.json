@@ -1,7 +1,7 @@
 {
   "name": "opencode-plugin-openspec",
   "version": "0.1.0",
-  "description": "An OpenCode plugin that integrates OpenSpec, providing a dedicated agent for planning and specifying software architecture.",
+  "description": "An OpenCode plugin that integrates OpenSpec, adding a dedicated 'openspec-plan' mode for creating and editing spec files.",
   "type": "module",
   "main": "dist/index.js",
   "files": [

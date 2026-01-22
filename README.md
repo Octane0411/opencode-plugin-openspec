@@ -1,6 +1,6 @@
 # opencode-plugin-openspec
 
-An OpenCode plugin that integrates OpenSpec, providing a dedicated agent for planning and specifying software architecture.
+An OpenCode plugin that integrates OpenSpec, adding a dedicated 'openspec-plan' mode for creating and editing spec files.
 
 ## Motivation
 
