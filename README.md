@@ -32,10 +32,11 @@ When using OpenCode's standard "Build mode" to create or modify OpenSpec plannin
 
 **Option 1: Let your agent do it (Recommended)**
 
-Paste this prompt into OpenCode:
+Copy and paste this prompt to your LLM agent (Claude Code, AmpCode, Cursor, etc.):
 
 ```
-Install opencode-plugin-openspec. It is an NPM package. Please add "opencode-plugin-openspec" to my opencode.json plugin list.
+Install opencode-plugin-openspec by following the instructions here:
+https://raw.githubusercontent.com/Octane0411/opencode-plugin-openspec/main/README.md
 ```
 
 **Option 2: Manual Installation**
@@ -54,7 +55,9 @@ OpenCode will automatically download and install the plugin the next time it run
 
 ### For LLM Agents
 
-If you are an AI agent tasked with installing this plugin, follow these steps:
+If you are an AI agent tasked with setting up this plugin, follow these steps:
+
+**IMPORTANT**: Do NOT run `npm install` or any terminal commands. You only need to edit the configuration file.
 
 1.  **Locate Configuration**: Find the user's OpenCode configuration file. It is typically at `~/.config/opencode/opencode.json` or `.opencode/opencode.json` in the workspace root.
 2.  **Read Configuration**: Read the content of the configuration file.
@@ -68,6 +71,8 @@ If you are an AI agent tasked with installing this plugin, follow these steps:
     ```
 4.  **Verify**: Inform the user that the plugin has been added and will be installed on the next OpenCode run.
 
+    > **Note**: You do not need to run `npm install` or download the package manually. OpenCode will automatically fetch the plugin based on the configuration.
+
 ## Usage
 
 1. Open an OpenSpec project in OpenCode.
@@ -79,7 +84,7 @@ If you are an AI agent tasked with installing this plugin, follow these steps:
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/opencode-plugin-openspec.git
+   git clone https://github.com/Octane0411/opencode-plugin-openspec.git
    cd opencode-plugin-openspec
    ```
 
