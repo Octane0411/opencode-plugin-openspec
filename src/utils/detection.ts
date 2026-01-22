@@ -11,7 +11,6 @@ import { join } from "node:path";
  */
 export async function isOpenSpecProject(ctx: PluginInput): Promise<boolean> {
   const openspecAgentsPath = join(ctx.directory, "openspec", "AGENTS.md");
-  const rootAgentsPath = join(ctx.directory, "AGENTS.md");
 
-  return existsSync(openspecAgentsPath) || existsSync(rootAgentsPath);
+  return existsSync(openspecAgentsPath);
 }

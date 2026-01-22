@@ -1,10 +1,15 @@
 {
   "name": "opencode-plugin-openspec",
   "version": "0.1.0",
+  "type": "module",
   "main": "src/index.ts",
   "peerDependencies": {
-    "@opencode-ai/plugin": "^1.1.1",
-    "@opencode-ai/sdk": "^1.1.1"
+    "@opencode-ai/plugin": "^1.1.19",
+    "@opencode-ai/sdk": "^1.1.19"
+  },
+  "scripts": {
+    "build": "bun build ./src/index.ts --outfile ./dist/index.js --target node",
+    "watch": "bun build ./src/index.ts --outfile ./dist/index.js --target node --watch"
   },
   "devDependencies": {
     "bun-types": "latest",
