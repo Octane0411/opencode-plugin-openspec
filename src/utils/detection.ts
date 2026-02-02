@@ -4,13 +4,15 @@ import { join } from "node:path";
 
 /**
  * Checks if the current workspace is an OpenSpec project.
- * 
+ *
  * Detection logic:
- * 1. Checks for `openspec/AGENTS.md` (Primary indicator)
- * 2. Checks for `AGENTS.md` in root (Secondary indicator)
+ * 1. Checks for `openspec/config.yaml` (Primary indicator - new OPSX format)
+ * 2. Checks for `openspec/AGENTS.md` (Fallback - legacy format)
  */
 export async function isOpenSpecProject(ctx: PluginInput): Promise<boolean> {
-  const openspecAgentsPath = join(ctx.directory, "openspec", "AGENTS.md");
+  const openspecDir = join(ctx.directory, "openspec");
+  const configYamlPath = join(openspecDir, "config.yaml");
+  const agentsMdPath = join(openspecDir, "AGENTS.md");
 
-  return existsSync(openspecAgentsPath);
+  return existsSync(configYamlPath) || existsSync(agentsMdPath);
 }
