@@ -19,14 +19,68 @@ export function createConfigHook(ctx: { directory: string }): Hooks["config"] {
       description: "OpenSpec Architect - Plan and specify software architecture.",
       prompt: OPENSPEC_SYSTEM_PROMPT,
       permission: {
+        // --- Read ---
+        // Allow all reads; block .env files (no secrets needed for spec work)
+        read: {
+          "*": "allow",
+          "*.env": "deny",
+          "*.env.*": "deny",
+          ".env": "deny",
+          ".env.*": "deny"
+        },
+
+        // --- Exploration tools (read-only, no side effects) ---
+        glob: "allow",
+        grep: "allow",
+        list: "allow",
+        lsp: "allow",
+
+        // --- Task management ---
+        todoread: "allow",
+        todowrite: "allow",
+
+        // --- Web & search ---
+        webfetch: "allow",
+        websearch: "allow",
+        codesearch: "allow",
+
+        // --- Agent tooling ---
+        task: "allow",
+        skill: "allow",
+        question: "allow",
+
+        // --- Safety guards ---
+        doom_loop: "ask",
+        external_directory: "ask",
+
+        // --- Edit: deny everything, allow only spec files ---
+        // Rules are evaluated last-match-wins, so "*": "deny" must come first
         edit: {
-          // Allow editing specific root files
+          "*": "deny",
           "project.md": "allow",
           "AGENTS.md": "allow",
-          // Allow editing anything in openspec directory
           "openspec/**": "allow",
-          // Allow editing anything in specs directory (standard OpenSpec structure)
           "specs/**": "allow"
+        },
+
+        // --- Bash: deny all by default, allow read-only filesystem + git read ---
+        bash: {
+          "*": "deny",
+          "grep *": "allow",
+          "ls": "allow",
+          "ls *": "allow",
+          "cat *": "allow",
+          "find *": "allow",
+          "echo": "allow",
+          "echo *": "allow",
+          "pwd": "allow",
+          "which *": "allow",
+          "env": "allow",
+          "printenv *": "allow",
+          "git status*": "allow",
+          "git log*": "allow",
+          "git diff*": "allow",
+          "git show*": "allow"
         }
       },
       color: "#FF6B6B" // Distinctive color for the agent
