@@ -20,13 +20,9 @@ export function createConfigHook(ctx: { directory: string }): Hooks["config"] {
       prompt: OPENSPEC_SYSTEM_PROMPT,
       permission: {
         // --- Read ---
-        // Allow all reads; block .env files (no secrets needed for spec work)
+        // Full read access; agent is trusted with the whole project
         read: {
-          "*": "allow",
-          "*.env": "deny",
-          "*.env.*": "deny",
-          ".env": "deny",
-          ".env.*": "deny"
+          "*": "allow"
         },
 
         // --- Exploration tools (read-only, no side effects) ---
