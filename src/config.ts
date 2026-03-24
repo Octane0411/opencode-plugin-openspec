@@ -62,6 +62,8 @@ export function createConfigHook(ctx: { directory: string }): Hooks["config"] {
         // --- Bash: deny all by default, allow read-only filesystem + git read ---
         bash: {
           "*": "deny",
+          "openspec": "allow",
+          "openspec *": "allow",
           "grep *": "allow",
           "ls": "allow",
           "ls *": "allow",
