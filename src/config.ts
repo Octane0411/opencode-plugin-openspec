@@ -86,7 +86,11 @@ export function createConfigHook(ctx: { directory: string }): Hooks["config"] {
 
     // 3. Inject into configuration
     const agentConfig = (config.agent || {}) as any;
-    agentConfig["openspec-plan"] = openSpecAgent;
+    // Merge the existing user config on top of the default openSpecAgent
+    agentConfig["openspec-plan"] = { 
+      ...openSpecAgent, 
+      ...(agentConfig["openspec-plan"] || {}) 
+    };
     config.agent = agentConfig;
   };
 }
