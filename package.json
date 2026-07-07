@@ -9,6 +9,7 @@
   ],
   "scripts": {
     "build": "bun build ./src/index.ts --outfile ./dist/index.js --target node",
+    "test": "bun test",
     "watch": "bun build ./src/index.ts --outfile ./dist/index.js --target node --watch",
     "prepublishOnly": "bun run build"
   },
