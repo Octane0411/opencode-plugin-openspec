@@ -2,6 +2,51 @@ import type { Hooks } from "@opencode-ai/plugin";
 import { isOpenSpecProject } from "./utils/detection";
 import { OPENSPEC_SYSTEM_PROMPT } from "./prompts";
 
+const OPEN_SPEC_EDIT_PERMISSIONS = {
+  "*": "deny",
+  "project.md": "allow",
+  "AGENTS.md": "allow",
+  "openspec/**": "allow",
+  "specs/**": "allow"
+} as const;
+
+const OPEN_SPEC_BASH_PERMISSIONS = {
+  "*": "deny",
+  "openspec": "allow",
+  "openspec *": "allow",
+  "grep *": "allow",
+  "ls": "allow",
+  "ls *": "allow",
+  "cat *": "allow",
+  "find *": "allow",
+  "echo": "allow",
+  "echo *": "allow",
+  "pwd": "allow",
+  "which *": "allow",
+  "env": "allow",
+  "printenv *": "allow",
+  "git status*": "allow",
+  "git log*": "allow",
+  "git diff*": "allow",
+  "git show*": "allow",
+
+  // Rules are last-match-wins. Keep write-capable shell forms after the
+  // read-oriented allow list so they cannot bypass OpenSpec planning scope.
+  "*>*": "deny",
+  "tee *": "deny",
+  "cp *": "deny",
+  "mv *": "deny",
+  "rm *": "deny",
+  "mkdir *": "deny",
+  "touch *": "deny",
+  "chmod *": "deny",
+  "chown *": "deny",
+  "find * -delete*": "deny",
+  "find * -exec*": "deny",
+  "find * -execdir*": "deny",
+  "xargs *": "deny"
+} as const;
+
 export function createConfigHook(ctx: { directory: string }): Hooks["config"] {
   return async (config) => {
     // 1. Check if this is an OpenSpec project
@@ -51,35 +96,10 @@ export function createConfigHook(ctx: { directory: string }): Hooks["config"] {
 
         // --- Edit: deny everything, allow only spec files ---
         // Rules are evaluated last-match-wins, so "*": "deny" must come first
-        edit: {
-          "*": "deny",
-          "project.md": "allow",
-          "AGENTS.md": "allow",
-          "openspec/**": "allow",
-          "specs/**": "allow"
-        },
+        edit: OPEN_SPEC_EDIT_PERMISSIONS,
 
         // --- Bash: deny all by default, allow read-only filesystem + git read ---
-        bash: {
-          "*": "deny",
-          "openspec": "allow",
-          "openspec *": "allow",
-          "grep *": "allow",
-          "ls": "allow",
-          "ls *": "allow",
-          "cat *": "allow",
-          "find *": "allow",
-          "echo": "allow",
-          "echo *": "allow",
-          "pwd": "allow",
-          "which *": "allow",
-          "env": "allow",
-          "printenv *": "allow",
-          "git status*": "allow",
-          "git log*": "allow",
-          "git diff*": "allow",
-          "git show*": "allow"
-        }
+        bash: OPEN_SPEC_BASH_PERMISSIONS
       },
       color: "#FF6B6B" // Distinctive color for the agent
     };
